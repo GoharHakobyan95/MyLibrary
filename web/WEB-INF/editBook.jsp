@@ -17,35 +17,29 @@
     List<Author> authors = (List<Author>) request.getAttribute("authors");
 %>
 <center>Please input Books Data.
-    <form action="/books/edit" method="post">
+    <form action="/books/edit" method="post" enctype="multipart/form-data">
         <input type="hidden" name="bookId" value="<%=book.getId()%>">
         <h2><input type="text" name="title" value="<%=book.getTitle()%>"/><br>
             <input type="text" name="description" value="<%=book.getDescription()%>"/><br>
             <input type="number" name="price" value="<%=book.getPrice()%>"/><br>
+            <input type="file" name="profilePic" value="<%=book.getProfilePic()%>"/><br>
             <select name="authorId">
                     <% for (Author author : authors) {
-                        if(author.equals(book.getAuthor())) {
-                     %>
-                <option selected value="<%=author.getId()%>">
-                    <%=author.getName()
-                    %>
-                    <%=author.getSurname()%>
-                    <%=author.getEmail()%>
-                    (<%=author.getAge()%>)
+                    if (author.equals(book.getAuthor())) {
+                %>
+                <option selected value ="<%=author.getId()%>">
+                    <%=author.getName()%><%=author.getSurname()%>
+                    <%=author.getEmail()%>(<%=author.getAge()%>)
                 </option>
                     <% } else { %>
-                <option value="<%=author.getId()%>">
-                        <%=author.getName()
-                    %>
-                        <%=author.getSurname()%>
-                        <%=author.getEmail()%>
+                <option value="<%=author.getId()%>"><%=author.getName() %>
+                        <%=author.getSurname()%><%=author.getEmail()%>
                     (<%=author.getAge()%>)
                     <br><input type="submit" value="Update"></h2>
-            <% } %>
-            <%} %>
+        <% } %>
+       <% } %>
+        </select>
+    </form>
 </center>
-</select>
-</form>
 </body>
-</html>
 </html>

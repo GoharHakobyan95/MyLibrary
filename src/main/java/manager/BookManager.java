@@ -14,13 +14,14 @@ public class BookManager {
     private AuthorManager authorManager = new AuthorManager();
 
     public void addBook(Book book) {
-        String sql = "Insert into book (title,description,price,author_id) Values(?,?,?,?)";
+        String sql = "Insert into book (title,description,price,author_id,profile_pic) Values(?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getDescription());
             ps.setDouble(3, book.getPrice());
             ps.setInt(4, book.getAuthor().getId());
+            ps.setString(5, book.getProfilePic());
             ps.executeUpdate();
 
             ResultSet resultSet = ps.getGeneratedKeys();
@@ -71,6 +72,7 @@ public class BookManager {
                 .title(resultSet.getString("title"))
                 .description(resultSet.getString("description"))
                 .price(resultSet.getDouble("price"))
+                .profilePic(resultSet.getString("profile_pic"))
                 .author(authorManager.getById(authorId))
                 .build();
 
@@ -88,14 +90,15 @@ public class BookManager {
     }
 
     public void editBook(Book book) {
-        String sql = "UPDATE  book set title = ?,description = ?,price = ?,author_id = ? where id = ?";
+        String sql = "UPDATE  book set title = ?,description = ?,price = ?,author_id = ?, profile_pic = ? where id = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getDescription());
             ps.setDouble(3, book.getPrice());
             ps.setInt(4, book.getAuthor().getId());
-            ps.setInt(5, book.getId());
+            ps.setString(5, book.getProfilePic());
+            ps.setInt(6, book.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

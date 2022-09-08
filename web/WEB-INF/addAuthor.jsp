@@ -12,16 +12,17 @@
 </head>
 <body>
 <center>Please input Authors Data.
-    <form action="/authors/add" method="post">
+    <form action="/authors/add" method="post" enctype="multipart/form-data">
         <input type="text" name="name" placeholder="Input  author's name"><br>
         <input type="text" name="surname" placeholder="Input author's surname"><br>
         <input type="email" name="email" placeholder="Input author's email"><br>
         <label for="tentacles">Please input author's age:</label>
         <input type="number" id="tentacles" name="age"
                min="0" max="100"><br>
-        <input type="submit" value="Add">
+         Upload profile photo
+        <input type="file" name="profilePic"><br>
+        <input type="submit" value="Add Author">
+    </form>
 </center>
-</form>
-
 </body>
 </html>

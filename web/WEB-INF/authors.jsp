@@ -18,6 +18,7 @@
 
 <table border="1">
     <tr>
+        <th>image</th>
         <th>id</th>
         <th>name</th>
         <th>surname</th>
@@ -26,6 +27,12 @@
         <th>action</th>
             <% for (Author author : authors) { %>
     <tr>
+        <td><% if (author.getProfilePic() == null || author.getProfilePic().length() == 0) {%>
+            <img src="/image/default.png" width="100"/>
+            <%} else { %>
+            <img src="/getImage?profilePic=<%=author.getProfilePic()%>" width="100"/>
+            <% }%>
+        </td>
         <td><%=author.getId()%>
         </td>
         <td><%=author.getName()%>
@@ -39,8 +46,6 @@
         <td><a href="/authors/remove?authorId=<%=author.getId()%>"> Remove</a> |
             <a href="/authors/edit?authorId=<%=author.getId()%>">Edit</a>
         </td>
-    </tr>
-
     <% }
     %>
     </tr>

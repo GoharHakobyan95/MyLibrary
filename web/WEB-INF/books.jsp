@@ -19,8 +19,10 @@
     AuthorManager authorManager = new AuthorManager();
 %>
 
+Please input book's Data.
 <table border="1">
     <tr>
+        <th>image</th>
         <th>id</th>
         <th>title</th>
         <th>description</th>
@@ -30,6 +32,11 @@
             <% for (Book book : books) {
                  %>
     <tr>
+        <td><%if (book.getProfilePic() == null || book.getProfilePic().length() == 0) {%>
+            <img src="/image/book.png" width="100"/>
+            <%} else { %>
+            <img src="/getImage?profilePic=<%=book.getProfilePic()%>" width="100"/>
+            <% } %></td>
         <td><%=book.getId()%>
         </td>
         <td><%=book.getTitle()%>
@@ -54,7 +61,6 @@
     </tr>
     <% }
     %>
-    </tr>
 </table>
 </body>
 </html>

@@ -1,8 +1,4 @@
 package servlet;
-
-
-import manager.AuthorManager;
-
 import manager.BookManager;
 import model.Book;
 
